@@ -94,6 +94,20 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install(c("SummarizedExperiment", "Rsubread", "GenomicRanges", "Biostrings"))
 ```
 
+Required R libraries:
+- dplyr - For data manipulation
+- data.table - For fast data import and manipulation
+- SummarizedExperiment - For handling genomic data
+- lattice - For visualization
+- Rsubread - For RNA-seq alignment and counting
+- ggplot2 - For visualization
+- GenomicRanges - For genomic interval manipulation
+- tidyr - For data reshaping
+- DT - For interactive tables
+- httr - For HTTP requests
+- Biostrings - For biological sequence manipulation
+- jsonlite - For JSON parsing
+
 ---
 
 ## Data Preparation
@@ -198,6 +212,75 @@ Where:
 
 ---
 
+## Target Identification
+
+LUCID identifies RNAi targets using two different approaches depending on the fungal lifestyle:
+
+### For Obligate Biotrophic Fungi
+
+For obligate biotrophs, the pipeline uses a TPM (Transcripts Per Million) threshold approach to identify highly expressed genes, since these fungi cannot be cultured outside their host, making differential expression analysis impractical.
+
+**Note:** The `coldata.csv` file is NOT required for this analysis method.
+
+Execute:
+
+```bash
+Rscript /LUCID/script/lucid_biotrophs.R \
+  <genome_gtf_dir> \
+  <reads_dir> \
+  <tpm_threshold> \
+  <essential_fasta_path> \
+  <orthofinder_tsv_path> \
+  <output_dir> \
+  <proteome_path>
+```
+
+**Parameters**:
+- `genome_gtf_dir`: Directory containing genome files (must contain genome.fa and genome.gtf)
+- `reads_dir`: Directory containing RNA-seq files (*_1.fastq, *_2.fastq)
+- `tpm_threshold`: TPM threshold for identifying highly expressed genes
+- `essential_fasta_path`: Path to essential proteins FASTA
+- `orthofinder_tsv_path`: Path to OrthoFinder results TSV
+- `output_dir`: Directory for output files
+- `proteome_path`: Path to proteome FASTA
+
+**Analysis approach:**
+1. Calculates TPM values for all genes
+2. Selects genes above the specified TPM threshold
+3. Compares selected genes with conserved orthologs
+4. Identifies those with homology to essential pathogenesis proteins
+
+### For Non-Obligate Biotrophic Fungi
+
+For hemibiotrophic and necrotrophic fungi, the pipeline uses differential expression analysis to compare gene expression during infection versus in vitro growth.
+
+**Note:** This approach requires the `coldata.csv` file described in the RNA-seq Processing section.
+
+Execute:
+
+```bash
+Rscript /LUCID/script/lucid_differential.R \
+  <genome_gtf_dir> \
+  <reads_dir> \
+  <log2fc_threshold> \
+  <essential_fasta_path> \
+  <orthofinder_tsv_path> \
+  <output_dir> \
+  <proteome_path>
+```
+
+**Parameters:**
+- Same as above, except `log2fc_threshold` replaces `tpm_threshold`
+- `log2fc_threshold`: Minimum log2 fold change value to consider a gene significantly upregulated during infection
+
+**Analysis approach:**
+1. Performs differential expression analysis between infection and control conditions using DESeq2
+2. Selects genes with log2FC above threshold (upregulated during infection)
+3. Compares selected genes with conserved orthologs
+4. Identifies those with homology to essential pathogenesis proteins
+
+---
+
 ## Results and Output Files
 
 The analysis pipeline generates several important output files:
@@ -225,32 +308,6 @@ The analysis pipeline generates several important output files:
 - `pca_plot.png`: Principal Component Analysis visualization of samples
 
 These files provide valuable information for designing RNA interference experiments targeting conserved, highly expressed genes in phytopathogenic fungi.
-
----
-
-## How LUCID Works
-
-LUCID integrates several bioinformatics approaches to identify key pathogenicity-related proteins that could serve as targets for RNA interference-based control strategies:
-
-1. **Ortholog Identification**: Using OrthoFinder to identify conserved genes across multiple fungal species.
-
-2. **Expression Analysis**: Two alternative approaches based on fungal lifestyle:
-   - **For obligate biotrophs**: TPM-based expression quantification (since these fungi cannot be cultured in vitro)
-   - **For non-obligate biotrophs**: Differential expression analysis between infection and control conditions using DESeq2
-
-3. **Target Selection**: Integrates orthology, expression, and homology data to identify:
-   - **Core Effector Proteins (CEPs)**: Conserved proteins essential for pathogenicity
-   - **Conserved Non-Annotated Proteins (CNAPs)**: Novel conserved proteins that lack functional annotation
-
-4. **Homology Search**: Uses DIAMOND to compare proteins against a database of known essential pathogenicity proteins.
-
-5. **Annotation**: Maps identified proteins to UniProt for functional annotation and provides comprehensive output files.
-
-This integrated approach helps identify promising RNAi targets that are:
-- Conserved across multiple pathogenic fungi (orthology analysis)
-- Highly expressed or upregulated during infection (expression analysis)
-- Functionally related to pathogenicity (homology to essential proteins)
-- Potentially novel virulence factors (identification of CNAPs)
 
 ---
 
