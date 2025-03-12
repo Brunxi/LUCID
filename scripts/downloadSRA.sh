@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directorio de salida
-output_dir="/mnt/data2/STORAGE/lucia_jimenez"
+output_dir="../data/reads/"
 
 # Lista de accesiones a descargar (modifica esta variable con tus accesiones)
 accessions=("SRR6924534" "SRR6924535" "SRR6924536")
