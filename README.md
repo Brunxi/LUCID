@@ -1,6 +1,13 @@
 # LUCID: Analysis Pipeline for Fungal Pathogens
 
-A comprehensive pipeline for analyzing conserved orthologs in phytopathogenic fungi, identifying RNA interference targets, and processing RNA-seq data.
+LUCID is a comprehensive bioinformatics analysis pipeline capable of detecting optimal targets for RNA interference-based control strategies in any phytopathogenic fungi, regardless of their lifestyle. By integrating transcriptomic data and comparative genomics, LUCID identifies genes that are:
+1. Highly expressed (obligate biotrophs) or differentially expressed during infection (non-obligate biotrophs)
+2. Conserved across a selected group of phytopathogenic fungi
+3. Categorized into two key groups:
+   - **Conserved Essential Proteins (CEPs)**: Conserved, highly expressed proteins with known functions essential for pathogenicity
+   - **Conserved Non-Annotated Proteins (CNAPs)**: Novel conserved proteins with high expression but lacking functional annotation
+
+This dual-approach pipeline provides valuable targets for developing effective and specific RNA interference-based control methods against fungal plant pathogens.
 
 ---
 
@@ -19,7 +26,21 @@ A comprehensive pipeline for analyzing conserved orthologs in phytopathogenic fu
 
 ## Introduction
 
-LUCID is a bioinformatics pipeline designed to identify conserved genes in phytopathogenic fungi that can serve as potential targets for RNA interference-based control strategies. The pipeline integrates ortholog identification, RNA-seq analysis, and protein function analysis to identify Core Effector Proteins (CEPs) and Conserved Non-Annotated Proteins (CNAPs).
+LUCID (Lifestyle-Unrestricted Conserved Interference-Directed targets) is a bioinformatics pipeline designed to identify the most promising targets for RNA interference-based control strategies in phytopathogenic fungi. 
+
+The pipeline's key strength is its ability to analyze any phytopathogenic fungus regardless of its lifestyle (obligate biotrophs, hemibiotrophs, or necrotrophs). LUCID integrates transcriptomics data with comparative genomics to identify genes that are:
+
+1. **Highly expressed or infection-specific**: The pipeline adaptively uses either TPM-based expression analysis (for obligate biotrophs) or differential expression analysis (for non-obligate biotrophs)
+
+2. **Evolutionary conserved**: Using OrthoFinder to identify orthologs conserved across user-selected groups of phytopathogenic fungi
+
+3. **Functionally important**: Through homology searches against a database of known pathogenicity factors
+
+The final output categorizes potential targets into two groups:
+- **Conserved Essential Proteins (CEPs)**: Proteins that are conserved, highly expressed, and have homology to known essential pathogenicity factors
+- **Conserved Non-Annotated Proteins (CNAPs)**: Conserved, highly expressed proteins without current functional annotation that represent novel potential targets
+
+This comprehensive approach makes LUCID a powerful tool for developing targeted, effective RNA interference strategies against diverse fungal plant pathogens.
 
 ---
 
