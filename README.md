@@ -123,7 +123,7 @@ LUCID/
 │   ├── proteomes/    # Proteome files go here
 │   ├── reads/        # RNA-seq reads go here
 │   └── references/   # Contains OrthoFinder output and essential protein database
-├── output/ 
+├── output/           # Directory for output files
 └── script/           # Analysis scripts
 
 ```
