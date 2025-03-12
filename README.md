@@ -199,12 +199,12 @@ For differential expression analysis (non-obligate biotrophs), create a `coldata
 
 ```csv
 illumina_code,type,treatment
-SRR6924534,paired-end,inf
-SRR6924535,paired-end,inf
-SRR6924536,paired-end,inf
-SRR6924547,paired-end,ctrl
-SRR6924548,paired-end,ctrl
-SRR6924549,paired-end,ctrl
+SRRXXXXXXX,paired-end,inf
+SRRXXXXXXX,paired-end,inf
+SRRXXXXXXX,paired-end,inf
+SRRXXXXXXX,paired-end,ctrl
+SRRXXXXXXX,paired-end,ctrl
+SRRXXXXXXX,paired-end,ctrl
 ```
 
 Where:
@@ -238,13 +238,13 @@ Rscript /LUCID/script/lucid_biotrophs.R \
 ```
 
 **Parameters**:
-- `genome_gtf_dir`: Directory containing genome files (must contain genome.fa and genome.gtf)
-- `reads_dir`: Directory containing RNA-seq files (*_1.fastq, *_2.fastq)
+- `genome_gtf_dir`: Directory containing genome files (must contain genome.fa and genome.gtf) (/LUCID/data/genome/)
+- `reads_dir`: Directory containing RNA-seq files (*_1.fastq, *_2.fastq) (/LUCID/data/reads/)
 - `tpm_threshold`: TPM threshold for identifying highly expressed genes
-- `essential_fasta_path`: Path to essential proteins FASTA
-- `orthofinder_tsv_path`: Path to OrthoFinder results TSV
-- `output_dir`: Directory for output files
-- `proteome_path`: Path to proteome FASTA
+- `essential_fasta_path`: Path to essential proteins FASTA (/LUCID/data/references/Essential_protein_database.fasta)
+- `orthofinder_tsv_path`: Path to OrthoFinder results TSV (/LUCID/data/references/Orthogroups.tsv)
+- `output_dir`: Directory for output files (/LUCID/output/)
+- `proteome_path`: Path to proteome FASTA of the fungus under study  (/LUCID/data/proteomes/your_proteome.fasta)
 
 **Analysis approach:**
 1. Calculates TPM values for all genes
