@@ -123,7 +123,9 @@ LUCID/
 │   ├── proteomes/    # Proteome files go here
 │   ├── reads/        # RNA-seq reads go here
 │   └── references/   # Contains OrthoFinder output and essential protein database
+├── output/ 
 └── script/           # Analysis scripts
+
 ```
 
 **Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND.
