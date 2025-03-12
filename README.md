@@ -94,20 +94,6 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install(c("SummarizedExperiment", "Rsubread", "GenomicRanges", "Biostrings"))
 ```
 
-Required R libraries:
-- dplyr - For data manipulation
-- data.table - For fast data import and manipulation
-- SummarizedExperiment - For handling genomic data
-- lattice - For visualization
-- Rsubread - For RNA-seq alignment and counting
-- ggplot2 - For visualization
-- GenomicRanges - For genomic interval manipulation
-- tidyr - For data reshaping
-- DT - For interactive tables
-- httr - For HTTP requests
-- Biostrings - For biological sequence manipulation
-- jsonlite - For JSON parsing
-
 ---
 
 ## Data Preparation
