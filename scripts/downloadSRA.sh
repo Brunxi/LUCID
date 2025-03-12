@@ -9,7 +9,7 @@ else
     echo "Directory $output_dir already exists."
 fi
 # List of accessions to download (modify this variable with your accessions)
-accessions=("SRR6924534" "SRR6924535" "SRR6924536")
+accessions=("SRR6924534" "SRR6924535" "SRR6924536" "SRR6924547" "SRR6924548" "SRR6924549")
 # Function to get the correct ENA URL
 get_ena_url() {
     local acc=$1
