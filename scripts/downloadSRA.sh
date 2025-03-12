@@ -1,67 +1,61 @@
 #!/bin/bash
-
-# Directorio de salida
+# Output directory
 output_dir="../data/reads/"
-
-# Lista de accesiones a descargar (modifica esta variable con tus accesiones)
+# Check if directory exists, create it if it doesn't
+if [ ! -d "$output_dir" ]; then
+    mkdir -p "$output_dir"
+    echo "Directory $output_dir created successfully."
+else
+    echo "Directory $output_dir already exists."
+fi
+# List of accessions to download (modify this variable with your accessions)
 accessions=("SRR6924534" "SRR6924535" "SRR6924536")
-
-# Función para obtener la URL correcta de ENA
+# Function to get the correct ENA URL
 get_ena_url() {
     local acc=$1
     local prefix=${acc:0:6}
     
-    # Tomar el último dígito de la accesión y formatearlo como "00X"
+    # Take the last digit of the accession and format it as "00X"
     local last_digit=${acc: -1}
     local subdir="00${last_digit}"
-
     echo "https://ftp.sra.ebi.ac.uk/vol1/fastq/${prefix}/${subdir}/${acc}"
 }
-
-# Función para verificar si un archivo existe en el servidor
+# Function to verify if a file exists on the server
 check_file_exists() {
     local url=$1
     wget --spider --quiet "$url"
-    return $?  # Devuelve 0 si existe, 1 si no
+    return $?  # Returns 0 if exists, 1 if not
 }
-
-# Función para descargar una sola accesión
+# Function to download a single accession
 download_accession() {
     local acc=$1
     local outdir=$2
-    echo "Procesando $acc..."
-
-    # Obtener la URL base
+    echo "Processing $acc..."
+    # Get the base URL
     base_url=$(get_ena_url "$acc")
-
-    # Construir URLs de los archivos
+    # Build file URLs
     url_1="${base_url}/${acc}_1.fastq.gz"
     url_2="${base_url}/${acc}_2.fastq.gz"
-
-    # Descargar Read 1
+    # Download Read 1
     if check_file_exists "$url_1"; then
-        echo "Descargando ${acc}_1.fastq.gz..."
+        echo "Downloading ${acc}_1.fastq.gz..."
         wget --no-check-certificate "$url_1" -O "${outdir}/${acc}_1.fastq.gz"
     else
-        echo "Error: ${acc}_1.fastq.gz no encontrado."
+        echo "Error: ${acc}_1.fastq.gz not found."
     fi
-
-    # Descargar Read 2
+    # Download Read 2
     if check_file_exists "$url_2"; then
-        echo "Descargando ${acc}_2.fastq.gz..."
+        echo "Downloading ${acc}_2.fastq.gz..."
         wget --no-check-certificate "$url_2" -O "${outdir}/${acc}_2.fastq.gz"
     else
-        echo "Error: ${acc}_2.fastq.gz no encontrado."
+        echo "Error: ${acc}_2.fastq.gz not found."
     fi
 }
-
-# Crear directorio de salida si no existe
+# Create output directory if it doesn't exist
 mkdir -p "$output_dir"
-
-# Procesar accesiones definidas en la variable
+# Process accessions defined in the variable
 for acc in "${accessions[@]}"; do
     download_accession "$acc" "$output_dir"
     echo "------------------------------------"
 done
-
-echo "Todas las descargas completadas."
+echo "All downloads completed."
