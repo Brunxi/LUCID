@@ -27,7 +27,7 @@ This dual-approach pipeline provides valuable targets for developing effective a
 
 ## Introduction
 
-LUCID (Lifestyle-Unrestricted Conserved Interference-Directed targets) is a bioinformatics pipeline designed to identify the most promising targets for RNA interference-based control strategies in phytopathogenic fungi. 
+LUCID (Locating Unique Candidate of Infection Determinants, a novel computational approach for target location and dsRNA design) is a bioinformatics pipeline designed to identify the most promising targets for RNA interference-based control strategies in phytopathogenic fungi. 
 
 The pipeline's key strength is its ability to analyze any phytopathogenic fungus regardless of its lifestyle (obligate biotrophs, hemibiotrophs, or necrotrophs). LUCID integrates transcriptomics data with comparative genomics to identify genes that are:
 
@@ -63,7 +63,7 @@ This comprehensive approach makes LUCID a powerful tool for developing targeted,
 
 ---
 
-## Installation and Dependencies
+## 1 Installation and Dependencies
 
 ### Conda Environment Setup
 
@@ -93,29 +93,13 @@ install.packages(c("dplyr", "data.table", "lattice", "ggplot2", "tidyr", "DT", "
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("SummarizedExperiment", "Rsubread", "GenomicRanges", "Biostrings"))
-```
-
-Required R libraries:
-- dplyr - For data manipulation
-- data.table - For fast data import and manipulation
-- SummarizedExperiment - For handling genomic data
-- lattice - For visualization
-- Rsubread - For RNA-seq alignment and counting
-- ggplot2 - For visualization
-- GenomicRanges - For genomic interval manipulation
-- tidyr - For data reshaping
-- DT - For interactive tables
-- httr - For HTTP requests
-- Biostrings - For biological sequence manipulation
-- jsonlite - For JSON parsing
-
 ---
 
 ## Data Preparation
 
 ### Directory Structure
 
-Create the following directory structure for your analysis:
+The following directory structure is necessary for your analysis:
 
 ```
 LUCID/
@@ -132,16 +116,18 @@ LUCID/
 **Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND.
 
 ### Genome Files
+Genome assembly and annotation file of the fungal species under investigation for transcriptomic analysis.
 
 **Location**: `LUCID/data/genome/`
 
 **Required files**:
-- `genome.fa` - Genome sequence in FASTA format
+- `genome.fa` - Genome sequence  in FASTA format
 - `genome.gtf` - Genome annotation in GTF format
 
 **Important**: Files must be named exactly as specified above.
 
 ### Proteome Files
+Proteomes of the fungal species under investigation along with those of a group of phytopathogenic fungi, which will be used for conservation analysis with OrthoFinder.
 
 **Location**: `LUCID/data/proteomes/`
 
@@ -161,28 +147,6 @@ LUCID/
 1. Use your own FASTQ files (place in the reads directory)
 2. Download from NCBI SRA using the provided script
 
----
-
-## Orthogroup Analysis
-
-OrthoFinder is used to identify orthologous groups across multiple fungal proteomes.
-
-### Running OrthoFinder
-
-Execute the OrthoFinder analysis script:
-
-```bash
-bash LUCID/script/run_orthofinder.sh
-```
-
-**Input**: Proteome files in `LUCID/data/proteomes/`
-**Output**: Orthogroup analysis in `LUCID/data/references/`
-
-You can modify input/output paths within the script if needed.
-
----
-
-## RNA-seq Processing
 
 ### Downloading SRA Data (Optional)
 
@@ -212,6 +176,27 @@ Where:
 - `illumina_code`: SRA accession number
 - `type`: Sequencing type (paired-end or single-end)
 - `treatment`: Condition (inf = infection, ctrl = control)
+
+---
+
+---
+
+## Orthogroup Analysis
+
+OrthoFinder is used to identify orthologous groups across multiple fungal proteomes.
+
+### Running OrthoFinder
+
+Execute the OrthoFinder analysis script:
+
+```bash
+bash LUCID/script/run_orthofinder.sh
+```
+
+**Input**: Proteome files in `LUCID/data/proteomes/`
+**Output**: Orthogroup analysis in `LUCID/data/references/`
+
+You can modify input/output paths within the script if needed.
 
 ---
 
@@ -290,7 +275,7 @@ The analysis pipeline generates several important output files:
 
 ### Common Output Files
 
-- `CEPs.fasta`: Sequences of identified Core Effector Proteins
+- `CEPs.fasta`: Sequences of identified Conserved Essential Proteins
 - `CNAPs.fasta`: Sequences of identified Conserved Non-Annotated Proteins
 - `CEPs_ids.txt`: List of CEP protein identifiers
 - `CNAPs_ids.txt`: List of CNAP protein identifiers
