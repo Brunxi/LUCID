@@ -1,4 +1,5 @@
-# LUCID: Analysis Pipeline for Fungal Pathogens
+# LUCID: Locating Unique Candidate of Infection Determinants, a novel computational approach for target location and dsRNA design
+ 
 
 LUCID is a comprehensive bioinformatics analysis pipeline capable of detecting optimal targets for RNA interference-based control strategies in any phytopathogenic fungi, regardless of their lifestyle. By integrating transcriptomic data and comparative genomics, LUCID identifies genes that are:
 1. Highly expressed (obligate biotrophs) or differentially expressed during infection (non-obligate biotrophs)
