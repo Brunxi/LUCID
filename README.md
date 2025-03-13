@@ -1,6 +1,5 @@
 # LUCID: Locating Unique Candidate of Infection Determinants, a novel computational approach for target location and dsRNA design
  
-
 LUCID is a comprehensive bioinformatics analysis pipeline capable of detecting optimal targets for RNA interference-based control strategies in any phytopathogenic fungi, regardless of their lifestyle. By integrating transcriptomic data and comparative genomics, LUCID identifies genes that are:
 1. Highly expressed (obligate biotrophs) or differentially expressed during infection (non-obligate biotrophs)
 2. Conserved across a selected group of phytopathogenic fungi
@@ -18,10 +17,9 @@ This dual-approach pipeline provides valuable targets for developing effective a
 3. [Installation and Dependencies](#installation-and-dependencies)
 4. [Data Preparation](#data-preparation)
 5. [Orthogroup Analysis](#orthogroup-analysis)
-6. [RNA-seq Processing](#rna-seq-processing)
-7. [Target Identification](#target-identification)
-8. [Results and Output Files](#results-and-output-files)
-9. [Troubleshooting](#troubleshooting)
+6. [Target Identification](#target-identification)
+7. [Results and Output Files](#results-and-output-files)
+8. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -63,7 +61,7 @@ This comprehensive approach makes LUCID a powerful tool for developing targeted,
 
 ---
 
-## 1 Installation and Dependencies
+## Installation and Dependencies
 
 ### Conda Environment Setup
 
@@ -93,6 +91,8 @@ install.packages(c("dplyr", "data.table", "lattice", "ggplot2", "tidyr", "DT", "
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("SummarizedExperiment", "Rsubread", "GenomicRanges", "Biostrings"))
+```
+
 ---
 
 ## Data Preparation
@@ -110,10 +110,9 @@ LUCID/
 │   └── references/   # Contains OrthoFinder output and essential protein database
 ├── output/           # Directory for output files
 └── script/           # Analysis scripts
-
 ```
 
-**Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND.
+**Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis,, that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND, and 
 
 ### Genome Files
 Genome assembly and annotation file of the fungal species under investigation for transcriptomic analysis.
@@ -121,7 +120,7 @@ Genome assembly and annotation file of the fungal species under investigation fo
 **Location**: `LUCID/data/genome/`
 
 **Required files**:
-- `genome.fa` - Genome sequence  in FASTA format
+- `genome.fa` - Genome sequence in FASTA format
 - `genome.gtf` - Genome annotation in GTF format
 
 **Important**: Files must be named exactly as specified above.
@@ -147,7 +146,6 @@ Proteomes of the fungal species under investigation along with those of a group 
 1. Use your own FASTQ files (place in the reads directory)
 2. Download from NCBI SRA using the provided script
 
-
 ### Downloading SRA Data (Optional)
 
 To download RNA-seq data from NCBI's Sequence Read Archive:
@@ -156,7 +154,23 @@ To download RNA-seq data from NCBI's Sequence Read Archive:
 bash LUCID/script/downloadSRA.sh
 ```
 
-Edit this script to include specific SRA accession numbers of interest.
+Edit this script to include specific SRA accession numbers of interest:
+
+```bash
+#!/bin/bash
+# Output directory
+output_dir="../data/reads/"
+# Check if directory exists, create it if it doesn't
+if [ ! -d "$output_dir" ]; then
+    mkdir -p "$output_dir"
+    echo "Directory $output_dir created successfully."
+else
+    echo "Directory $output_dir already exists."
+fi
+# List of accessions to download (modify this variable with your accessions)
+accessions=("SRR6924534" "SRR6924535" "SRR6924536" "SRR6924547" "SRR6924548" "SRR6924549")
+
+```
 
 ### Sample Metadata for Differential Expression
 
@@ -181,7 +195,7 @@ Where:
 
 ## Orthogroup Analysis
 
-OrthoFinder is used to identify orthologous groups across multiple fungal proteomes.
+OrthoFinder is used to identify orthologous groups across multiple fungal proteomes, those previously located in `LUCID/data/proteomes/`
 
 ### Running OrthoFinder
 
@@ -191,8 +205,8 @@ Execute the OrthoFinder analysis script:
 bash LUCID/script/run_orthofinder.sh
 ```
 
-**Input**: Proteome files in `LUCID/data/proteomes/`
-**Output**: Orthogroup analysis in `LUCID/data/references/`
+**Input**: Proteome files in `LUCID/data/proteomes/`  
+**Output**: Orthogroup analysis in `LUCID/data/references/Orthogroups.tsv`
 
 You can modify input/output paths within the script if needed.
 
@@ -240,7 +254,7 @@ Rscript /LUCID/script/lucid_biotrophs.R \
 
 For hemibiotrophic and necrotrophic fungi, the pipeline uses differential expression analysis to compare gene expression during infection versus in vitro growth.
 
-**Note:** This approach requires the `coldata.csv` file described in the RNA-seq Processing section.
+**Note:** This approach requires the `/LUCID/data/genome/coldata.csv` file described in the RNA-seq Processing section.
 
 Execute:
 
