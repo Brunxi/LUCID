@@ -179,8 +179,6 @@ Where:
 
 ---
 
----
-
 ## Orthogroup Analysis
 
 OrthoFinder is used to identify orthologous groups across multiple fungal proteomes.
