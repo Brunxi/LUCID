@@ -1,0 +1,20 @@
+From	Entry	Entry.Name	Reviewed	Protein.names	Gene.Names	Organism	Length
+Bcin01p08320.1	A0A384J6W8	A0A384J6W8_BOTFB	unreviewed	Bccne1	Bccne1 BCIN_01g08320	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	588
+Bcin11p00350.1	A0A384JVS0	A0A384JVS0_BOTFB	unreviewed	Peroxisomal membrane protein PEX14 (Peroxin-14)	Bcpex14 BCIN_11g00350	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	369
+Bcin11p00350.2	A0A384JWF6	A0A384JWF6_BOTFB	unreviewed	Peroxisomal membrane protein PEX14 (Peroxin-14)	Bcpex14 BCIN_11g00350	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	266
+Bcin12p04690.1	A0A384JZI0	A0A384JZI0_BOTFB	unreviewed	short-chain 2-methylacyl-CoA dehydrogenase (EC 1.3.8.5)	BCIN_12g04690	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	443
+Bcin13p00960.1	A0A384K0D3	A0A384K0D3_BOTFB	unreviewed	Endoplasmic reticulum chaperone BiP (EC 3.6.4.10) (Immunoglobulin heavy chain-binding protein homolog)	Bckar2 BCIN_13g00960	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	670
+Bcin13p03800.1	A0A384K152	A0A384K152_BOTFB	unreviewed	Alpha-1,3/1,6-mannosyltransferase ALG2 (EC 2.4.1.132) (EC 2.4.1.257) (GDP-Man:Man(1)GlcNAc(2)-PP-Dol alpha-1,3-mannosyltransferase)	Bcalg2 BCIN_13g03800	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	503
+Bcin15p04350.3	A0A384K524	A0A384K524_BOTFB	unreviewed	Uncharacterized protein	BCIN_15g04350	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	512
+Bcin15p04350.1	A0A384K524	A0A384K524_BOTFB	unreviewed	Uncharacterized protein	BCIN_15g04350	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	512
+Bcin15p04350.2	A0A384K524	A0A384K524_BOTFB	unreviewed	Uncharacterized protein	BCIN_15g04350	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	512
+Bcin02p03780.1	A0A384J9C2	A0A384J9C2_BOTFB	unreviewed	Peroxisomal ATPase PEX6 (Peroxin-6)	Bcpex6 BCIN_02g03780	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	1363
+Bcin02p03780.2	A0A384J987	A0A384J987_BOTFB	unreviewed	Peroxisomal ATPase PEX6 (Peroxin-6)	Bcpex6 BCIN_02g03780	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	1390
+Bcin03p03880.1	A0A384JCE1	A0A384JCE1_BOTFB	unreviewed	Bcdoa1	Bcdoa1 BCIN_03g03880	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	772
+Bcin03p06600.1	A0A384JCX1	A0A384JCX1_BOTFB	unreviewed	Heat shock 70 kDa protein	BCIN_03g06600	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	630
+Bcin05p00680.1	A0A384JGA5	A0A384JGA5_BOTFB	unreviewed	histidine kinase (EC 2.7.13.3)	Bchhk2 BCIN_05g00680	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	2129
+Bcin06p05400.1	A0A384JKI4	A0A384JKI4_BOTFB	unreviewed	acetyl-CoA C-acetyltransferase (EC 2.3.1.9)	BCIN_06g05400	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	434
+Bcin06p05730.1	A0A384JKX7	A0A384JKX7_BOTFB	unreviewed	Protein disulfide-isomerase (EC 5.3.4.1)	Bcpdi1 BCIN_06g05730	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	531
+Bcin08p01800.2	A0A384JPF9	A0A384JPF9_BOTFB	unreviewed	ornithine decarboxylase (EC 4.1.1.17)	BCIN_08g01800	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	441
+Bcin08p01800.1	A0A384JPF9	A0A384JPF9_BOTFB	unreviewed	ornithine decarboxylase (EC 4.1.1.17)	BCIN_08g01800	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	441
+Bcin08p03840.1	A0A384JQH2	ABA2_BOTFB	reviewed	Cytochrome P450 monooxygenase aba2 (EC 1.-.-.-) (Abscisic acid biosynthesis cluster protein 2)	aba2 BCIN_08g03840	Botryotinia fuckeliana (strain B05.10) (Noble rot fungus) (Botrytis cinerea)	527
