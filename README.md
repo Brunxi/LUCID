@@ -18,8 +18,9 @@ This dual-approach pipeline provides valuable targets for developing effective a
 4. [Data Preparation](#data-preparation)
 5. [Orthogroup Analysis](#orthogroup-analysis)
 6. [Target Identification](#target-identification)
-7. [Results and Output Files](#results-and-output-files)
-8. [Troubleshooting](#troubleshooting)
+7. [dsRNA Design](#dsrna-design)
+8. [Results and Output Files](#results-and-output-files)
+9. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -56,7 +57,13 @@ This comprehensive approach makes LUCID a powerful tool for developing targeted,
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │  Results and    │◄────│     Target      │◄────│    RNA-seq      │
 │  Output Files   │     │  Identification  │     │   Processing    │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
+└─────────┬───────┘     └─────────────────┘     └─────────────────┘
+          │
+          ▼
+┌─────────────────┐
+│    dsRNA        │
+│    Design       │
+└─────────────────┘
 ```
 
 ---
@@ -74,6 +81,7 @@ conda activate lucid-env
 # Install bioinformatics tools
 conda install -c bioconda diamond
 conda install -c bioconda orthofinder
+conda install -c bioconda bowtie
 
 # Install R and required packages
 conda install -c conda-forge r-base
@@ -91,6 +99,14 @@ install.packages(c("dplyr", "data.table", "lattice", "ggplot2", "tidyr", "DT", "
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("SummarizedExperiment", "Rsubread", "GenomicRanges", "Biostrings"))
+```
+
+### Python Package Requirements
+
+For the dsRNA design component, install the following Python packages:
+
+```bash
+pip install biopython pandas primer3-py matplotlib numpy sifi21-plus
 ```
 
 ---
@@ -112,7 +128,7 @@ LUCID/
 └── script/           # Analysis scripts
 ```
 
-**Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis,, that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND, and 
+**Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND.
 
 ### Genome Files
 Genome assembly and annotation file of the fungal species under investigation for transcriptomic analysis.
@@ -281,6 +297,73 @@ Rscript /LUCID/script/lucid_differential.R \
 
 ---
 
+## dsRNA Design
+
+After identifying target genes (CEPs and CNAPs), the next step is to design dsRNA molecules for RNAi-based control. LUCID includes a specialized script for this purpose that identifies the optimal region for dsRNA amplification.
+
+### Running the dsRNA Design Script
+
+After target identification, use the `phase2-dsrna.sh` script to design optimal primers for dsRNA amplification:
+
+```bash
+bash LUCID/script/phase2-dsrna.sh <input.fasta> <output_dir> <transcriptome.fasta>
+```
+
+**Parameters**:
+- `input.fasta`: FASTA file containing target gene sequences (typically CEPs.fasta or CNAPs.fasta)
+- `output_dir`: Directory to store outputs
+- `transcriptome.fasta`: Reference transcriptome for siRNA specificity analysis
+
+**Example**:
+```bash
+bash LUCID/script/phase2-dsrna.sh ./output/CEPs.fasta ./output/dsrna_results/ ./data/genome/transcriptome.fasta
+```
+
+### What the Script Does
+
+The `phase2-dsrna.sh` script performs several key functions:
+
+1. **Builds a Bowtie database** from the transcriptome for siRNA specificity analysis
+2. **Analyzes target sequences** to identify accessible regions for siRNA binding
+3. **Identifies the optimal 200-300 bp window** with the highest density of effective siRNAs
+4. **Designs PCR primers** to amplify this optimal window using Primer3
+
+### Output Files
+
+The script generates three main output files for each input sequence:
+
+1. **siRNA Analysis Plot** (`./output_dir/plots/{sequence_id}_analysis.png`):
+   - Graphical visualization of siRNA density and accessibility along the sequence
+   - Highlighted selected window for dsRNA amplification
+
+2. **Primer Design File** (`./output_dir/primers/{sequence_id}_primers.txt`):
+   - Multiple primer pairs for amplifying the selected region
+   - Details including sequence, TM, GC content, and product size
+
+3. **JSON Results** (`./output_dir/{sequence_id}.json`):
+   - Detailed information on siRNA positions, efficiency scores, and accessibility
+
+### Analysis Algorithm
+
+The script employs a modified version of sifi21 to:
+
+1. Evaluate each potential siRNA for:
+   - Target site accessibility
+   - Strand-specific binding
+   - End stability
+   - Terminal nucleotide composition
+   - Overall efficacy score
+
+2. Identify a 200-300 bp window with the highest density of effective siRNAs
+
+3. Design primers to amplify this region using Primer3 with parameters optimized for dsRNA production:
+   - Optimal primer size: 20 bp (range: 18-25 bp)
+   - Optimal TM: 60°C (range: 57-63°C)
+   - GC content: 20-80%
+   - Product size: 200-300 bp
+
+---
+
 ## Results and Output Files
 
 The analysis pipeline generates several important output files:
@@ -307,6 +390,12 @@ The analysis pipeline generates several important output files:
 - `significant_genes_inf_vs_ctrl.tsv`: Genes significantly upregulated during infection
 - `pca_plot.png`: Principal Component Analysis visualization of samples
 
+### For dsRNA Design
+
+- Primer design files (in `./output_dir/primers/`)
+- siRNA analysis plots (in `./output_dir/plots/`)
+- JSON results with detailed siRNA information
+
 These files provide valuable information for designing RNA interference experiments targeting conserved, highly expressed genes in phytopathogenic fungi.
 
 ---
@@ -318,6 +407,7 @@ These files provide valuable information for designing RNA interference experime
 - **Error with OrthoFinder**: Ensure all proteome files are valid FASTA format and properly downloaded from ENSEMBL FUNGI
 - **RNA-seq analysis error**: Verify that genome files are correctly named as `genome.fa` and `genome.gtf`
 - **SRA download failure**: Check internet connection and SRA accession numbers
+- **dsRNA design errors**: Ensure the input FASTA contains valid sequences and Python dependencies are installed
 
 ### Getting Help
 
