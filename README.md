@@ -242,7 +242,7 @@ For obligate biotrophs, the pipeline uses a TPM (Transcripts Per Million) thresh
 Execute:
 
 ```bash
-Rscript /LUCID/script/lucid_biotrophs.R \
+Rscript /LUCID/script/PHASE1_lucid_biotrophs.R \
   <genome_gtf_dir> \
   <reads_dir> \
   <tpm_threshold> \
@@ -276,7 +276,7 @@ For hemibiotrophic and necrotrophic fungi, the pipeline uses differential expres
 Execute:
 
 ```bash
-Rscript /LUCID/script/lucid_differential.R \
+Rscript /LUCID/script/PHASE1_lucid_pathogens.R \
   <genome_gtf_dir> \
   <reads_dir> \
   <log2fc_threshold> \
