@@ -131,13 +131,14 @@ LUCID/
 **Important Note:** The `references/` directory contains a database of essential proteins for pathogenesis that is used as a reference for detecting Conserved Essential Proteins (CEPs) through comparative genomics using DIAMOND.
 
 ### Genome Files
-Genome assembly and annotation file of the fungal species under investigation for transcriptomic analysis.
+Genome assembly, trasncriptome and annotation file of the fungal species under investigation for transcriptomic analysis.
 
 **Location**: `LUCID/data/genome/`
 
 **Required files**:
 - `genome.fa` - Genome sequence in FASTA format
 - `genome.gtf` - Genome annotation in GTF format
+- `transcriptome.fasta`: Reference transcriptome 
 
 **Important**: Files must be named exactly as specified above.
 
@@ -310,13 +311,13 @@ bash LUCID/script/phase2-dsrna.sh <input.fasta> <output_dir> <transcriptome.fast
 ```
 
 **Parameters**:
-- `input.fasta`: FASTA file containing target gene sequences (typically CEPs.fasta or CNAPs.fasta)
+- `input.fasta`:  FASTA file containing transcript sequences of selected target genes. After identifying CEPs and CNAPs in phase 1, users should create a separate FASTA file containing only the transcript sequences of specific targets they wish to analyze for dsRNA design.
 - `output_dir`: Directory to store outputs
 - `transcriptome.fasta`: Reference transcriptome for siRNA specificity analysis
 
 **Example**:
 ```bash
-bash LUCID/script/phase2-dsrna.sh ./output/CEPs.fasta ./output/dsrna_results/ ./data/genome/transcriptome.fasta
+bash LUCID/script/phase2-dsrna.sh ./output/selected_transcripts.fasta ./output/dsrna_results/ ./data/genome/transcriptome.fasta
 ```
 
 ### What the Script Does
