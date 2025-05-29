@@ -1,7 +1,7 @@
 # LUCID: Locating Unique Candidate of Infection Determinants, a novel computational approach for target location and dsRNA design
 
 <p align="center">
-  <img src="LUCID_icon.png" width="200" alt="Lucid logo"/>
+  <img src="LUCID_icon.png" width="400" alt="Lucid logo"/>
 </p>
 
 LUCID is a comprehensive bioinformatics analysis pipeline capable of detecting optimal targets for RNA interference-based control strategies in any phytopathogenic fungi, regardless of their lifestyle. By integrating transcriptomic data and comparative genomics, LUCID identifies genes that are:
