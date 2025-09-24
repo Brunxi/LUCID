@@ -1,4 +1,4 @@
-# LUCID: Locating Unique Candidate of Infection Determinants, a novel computational approach for target location and dsRNA design
+# LUCID:  a novel computational approach for target location and dsRNA design
 
 <p align="center">
   <img src="LUCID_icon.png" width="400" alt="Lucid logo"/>
@@ -45,30 +45,6 @@ The final output categorizes potential targets into two groups:
 - **Conserved Non-Annotated Proteins (CNAPs)**: Conserved, highly expressed proteins without current functional annotation that represent novel potential targets
 
 This comprehensive approach makes LUCID a powerful tool for developing targeted, effective RNA interference strategies against diverse fungal plant pathogens.
-
----
-
-## Pipeline Overview
-
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│  Installation   │────►│ Data Preparation │────►│   Orthogroup    │
-│  & Dependencies │     │   (Proteomes,    │     │    Analysis     │
-└─────────────────┘     │  Genomes, Reads) │     │  (OrthoFinder)  │
-                        └─────────────────┘     └────────┬────────┘
-                                                          │
-                                                          ▼
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│  Results and    │◄────│     Target      │◄────│    RNA-seq      │
-│  Output Files   │     │  Identification  │     │   Processing    │
-└─────────┬───────┘     └─────────────────┘     └─────────────────┘
-          │
-          ▼
-┌─────────────────┐
-│    dsRNA        │
-│    Design       │
-└─────────────────┘
-```
 
 ---
 
