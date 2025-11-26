@@ -58,6 +58,7 @@ conda activate lucid-env
 conda install -c bioconda diamond
 conda install -c bioconda orthofinder
 conda install -c bioconda bowtie
+conda install -c bioconda viennarna
 
 # Install R and required packages
 conda install -c conda-forge r-base
@@ -82,7 +83,8 @@ BiocManager::install(c("SummarizedExperiment", "Rsubread", "GenomicRanges", "Bio
 For the dsRNA design component, install the following Python packages:
 
 ```bash
-pip install biopython pandas primer3-py matplotlib numpy sifi21-plus
+pip install biopython pandas primer3-py matplotlib numpy
+pip install -e ./software/sifi21_plus
 ```
 
 ---
