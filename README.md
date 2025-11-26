@@ -51,6 +51,7 @@ This comprehensive approach makes LUCID a powerful tool for developing targeted,
 Create a conda environment with the required dependencies:
 
 ```bash
+cd LUCID/
 conda create -n lucid-env
 conda activate lucid-env
 
