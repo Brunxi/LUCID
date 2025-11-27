@@ -159,7 +159,7 @@ def get_primers(query_sequences, output_dir, bowtie_db):
             start_pos = 0
             end_pos = 0
             
-            for window_len in range(250, 301):
+            for window_len in range(200, 401):
                 for start in range(seq_len - window_len + 1):
                     end = start + window_len
                     window_density = sum(density[start:end])
