@@ -305,7 +305,7 @@ The `phase2-dsrna.sh` script performs several key functions:
 
 1. **Builds a Bowtie database** from the transcriptome for siRNA specificity analysis
 2. **Analyzes target sequences** to identify accessible regions for siRNA binding
-3. **Identifies the optimal 200-300 bp window** with the highest density of effective siRNAs
+3. **Identifies the optimal 200-400 bp window** with the highest density of effective siRNAs
 4. **Designs PCR primers** to amplify this optimal window using Primer3
 
 ### Output Files
