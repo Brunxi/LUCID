@@ -346,7 +346,7 @@ The script employs a modified version of sifi21 to:
 
 ## Phase 3 – dsRNAmax Off-Target Validation
 
-Before running these scripts, compile the `dsRNAmax` binary located in `software/LUCID/dsRNAmax` (only required once):
+Before running these scripts, make sure `dsRNAmax` is present (clone the submodule) and compile the binary (only once):
 
 ```bash
 cd software/LUCID/dsRNAmax
