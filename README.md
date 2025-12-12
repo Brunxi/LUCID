@@ -119,7 +119,7 @@ Genome assembly, trasncriptome and annotation file of the fungal species under i
 - `genome.gtf` - Genome annotation in GTF format
 - `transcriptome.fasta`: Reference transcriptome 
 
-**Important**: Files must be named exactly as specified above.
+**Important**: Files must be named exactly as specified above and downloaded from Ensembl Fungi
 
 ### Proteome Files
 Proteomes of the fungal species under investigation along with those of a group of phytopathogenic fungi, which will be used for conservation analysis with OrthoFinder.
