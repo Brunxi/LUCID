@@ -344,6 +344,55 @@ The script employs a modified version of sifi21 to:
 
 ---
 
+## Phase 3 – dsRNAmax Off-Target Validation
+
+Before running these scripts, compile the `dsRNAmax` binary located in `software/LUCID/dsRNAmax` (only required once):
+
+```bash
+cd software/LUCID/dsRNAmax
+go build -o dsRNAmax
+cd -
+```
+
+### Phase 3A – Chimeric dsRNA Design
+
+Runs `scripts/PHASE3A_chimeric_dsRNA.sh` to concatenate validated amplicons and remove kmers with off-target matches against a transcriptome of interest.
+
+```bash
+bash scripts/PHASE3A_chimeric_dsRNA.sh \
+    /path/to/phase2/validated_sequences/ \
+    /path/to/offtarget_transcriptome.fa \
+    --kmer-len 21 \
+    --output-dir output/phase3a
+```
+
+Outputs:
+- `output/phase3a/chimeric_dsrna.fasta`: final off-target-filtered construct
+- `output/phase3a/chimeric_sequence.txt`: concatenated intermediate sequence
+- `output/phase3a/chimeric_dsrna_stats.csv`: retained/removed kmers per block
+- `output/phase3a/chimeric_design.log`: dsRNAmax run log
+
+### Phase 3B – Off-Target Validation
+
+Runs `scripts/PHASE3B_validate_offtargets.sh` to evaluate any dsRNA FASTA against a transcriptome and quantify remaining off-target kmers.
+
+```bash
+bash scripts/PHASE3B_validate_offtargets.sh \
+    /path/to/dsrna.fasta \
+    /path/to/offtarget_transcriptome.fa \
+    --kmer-len 21 \
+    --output-dir output/phase3b
+```
+
+For each sequence the script reports:
+- Total kmers, off-target matches, and clean kmers
+- `output/phase3b/<sequence>_dsrnamax_<target>.log`: detailed dsRNAmax log
+- `output/phase3b/<sequence>_validated_no_<target>.fasta`: produced when no off-target kmers remain
+
+Adjust `--kmer-len` and `--output-dir` to match the organism or experimental design.
+
+---
+
 ## Results and Output Files
 
 The analysis pipeline generates several important output files:
